@@ -9,13 +9,17 @@ import os
 LINE = "chore: Friday 4:59pm deploy to prod \u2014 my context window ends before the incident does"
 
 
-def main() -> None:
-    out_path = os.environ.get("ENTRY_OUTPUT", "/output/entry.txt")
+def write_line(out_path: str) -> None:
     parent = os.path.dirname(out_path)
     if parent:
         os.makedirs(parent, exist_ok=True)
     with open(out_path, "w", encoding="utf-8", newline="\n") as f:
         f.write(LINE + "\n")
+
+
+def main() -> None:
+    out_path = os.environ.get("ENTRY_OUTPUT", "/output/entry.txt")
+    write_line(out_path)
 
 
 if __name__ == "__main__":
